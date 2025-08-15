@@ -1,30 +1,29 @@
 # mongocleaner
 
-## vars
-**Required:**
-- MONGODB_DB_NAME - имя базы данных | def: db
-- MONGODB_COLLECTION_NAME - имя коллекции | def: collection
-- MONGODB_RETENTION_DAYS - сколько дней хранить данные, все что созданно раньше будет удалено | def: 30
+## Variables
 
-**Auth with uri string:**
-- MONGODB_URI_STRING - строка подключения
+| Name | Description | Default |
+|---|---|---|
+| **Required:** |
+| MONGODB_DB_NAME | Имя базы данных. | db |
+| MONGODB_COLLECTION_NAME | Имя коллекции | collection |
+| MONGODB_RETENTION_DAYS | Данные какой давности необходимо сохранить, а все что ранее удалить | 30 |
+| **Auth with uri string:** |
+| MONGODB_URI_STRING | Строка подключения | - |
+| **Auth with parameters:** |
+| MONGODB_DATABASE_ADMIN_USER | Пользователь базы данных | - |
+| MONGODB_USER_ADMIN_PASSWORD | Пароль пользователя | - |
+| MONGODB_HOST | Имя или адрес сервера для подключения | localhost |
+| MONGODB_PORT | Порт на котором слушает БД | 27017 |
+| MONGODB_AUTH_SOURCE | БД для аутентификации | None |
+| MONGODB_DIRECT_CONNECTION | Включить перенаправление | True |
+| MONGODB_APP_NAME | Имя клиента (приложения) | MongoCleaner |
+| **Connecttion timeouts:** |
+| MONGODB_CONNECT_TIMEOUT | Таймаут подключения | 5000 |
+| MONGODB_SOCKET_TIMEOUT | Таймаут операций | 30000 |
+| MONGODB_SERVER_SELECTION_TIMEOUT | Таймаут выбора сервера | 2000 |
 
-**Auth with parameters:**
-- MONGODB_DATABASE_ADMIN_USER - юзер
-- MONGODB_USER_ADMIN_PASSWORD - пароль
-- MONGODB_HOST - хост | def: localhost
-- MONGODB_PORT - порт | def: 27017
-- MONGODB_DB_NAME - имя базы | def: db
-- MONGODB_AUTH_SOURCE - бд для аутентификации | def: None
-- MONGODB_DIRECT_CONNECTION - перенаправление | def: True
-- MONGODB_APP_NAME - имя приложения | def: MongoCleaner
-
-**Connect timeout:**
-- MONGODB_CONNECT_TIMEOUT - таймаут подключения | def: 5000
-- MONGODB_SOCKET_TIMEOUT - таймаут операций | def: 30000
-- MONGODB_SERVER_SELECTION_TIMEOUT - таймаут выбора сервера | def: 20000
-
-## Example
+## Examples
 **Build**
 ```bash
 docker build -t mongocleaner .
