@@ -93,9 +93,7 @@ class MongoCleaner:
                     "$lt": cutoff_date
                 }
             })
-            self.log(f"", "CLEANUP")
             self.log(f"Deleted {result.deleted_count} documents", "CLEANUP")
-            self.log(f"", "CLEANUP")
             return result.deleted_count
         except PyMongoError as e:
             self.log(f"Deletion failed: {str(e)}", "CLEANUP", True)
@@ -123,12 +121,10 @@ class MongoCleaner:
     def get_collection_stats(self):
         try:
             stats = self.db.command({"collStats": self.collection_name})
-            self.log(f"", "STATS")
             self.log(f"Statistics of collection: \"{self.collection_name}\"", "STATS")
             self.log(f"Documents: \t{stats['count']}", "STATS")
             self.log(f"Storage size: \t{stats['storageSize'] / (1024*1024):.2f} MB", "STATS")
             self.log(f"Index size: \t{stats['totalIndexSize'] / (1024*1024):.2f} MB", "STATS")
-            self.log(f"", "STATS")
             return stats
         except PyMongoError as e:
             self.log(f"Failed to get statistics: {str(e)}", "STATS", True)
