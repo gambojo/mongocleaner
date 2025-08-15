@@ -20,7 +20,7 @@ class MongoCleaner:
         self.appname = os.getenv('MONGODB_APP_NAME', 'MongoCleaner')
         self.collection_name = os.getenv('MONGODB_COLLECTION_NAME', 'collection')
         self.retention_days = int(os.getenv('MONGODB_RETENTION_DAYS', '30'))
-        self.connect_timeout = int(os.getenv('MONGODB_CONNECT_TIME', '5000'))
+        self.connect_timeout = int(os.getenv('MONGODB_CONNECT_TIMEOUT', '5000'))
         self.socket_timeout = int(os.getenv('MONGODB_SOCKET_TIMEOUT', '30000'))
         self.server_selection_timeout = int(os.getenv('MONGODB_SERVER_SELECTION_TIMEOUT', '20000'))
         self.timezone = timezone.utc

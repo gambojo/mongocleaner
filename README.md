@@ -2,9 +2,9 @@
 
 ## vars
 **Required:**
-- MONGODB_DB_NAME - имя базы данных
-- MONGODB_COLLECTION_NAME - имя коллекции 
-- MONGODB_RETENTION_DAYS - сколько дней хранить данные, все что созданно раньше будет удалено
+- MONGODB_DB_NAME - имя базы данных | def: db
+- MONGODB_COLLECTION_NAME - имя коллекции | def: collection
+- MONGODB_RETENTION_DAYS - сколько дней хранить данные, все что созданно раньше будет удалено | def: 30
 
 **Auth with uri string:**
 - MONGODB_URI_STRING - строка подключения
@@ -12,17 +12,17 @@
 **Auth with parameters:**
 - MONGODB_DATABASE_ADMIN_USER - юзер
 - MONGODB_USER_ADMIN_PASSWORD - пароль
-- MONGODB_HOST - хост
-- MONGODB_PORT - порт
-- MONGODB_DB_NAME - имя базы
-- MONGODB_AUTH_SOURCE - бд для аутентификации
-- MONGODB_DIRECT_CONNECTION - перенаправление
-- MONGODB_APP_NAME - имя приложения
+- MONGODB_HOST - хост | def: localhost
+- MONGODB_PORT - порт | def: 27017
+- MONGODB_DB_NAME - имя базы | def: db
+- MONGODB_AUTH_SOURCE - бд для аутентификации | def: None
+- MONGODB_DIRECT_CONNECTION - перенаправление | def: True
+- MONGODB_APP_NAME - имя приложения | def: MongoCleaner
 
 **Connect timeout:**
-- MONGODB_CONNECT_TIME - таймаут подключения
-- MONGODB_SOCKET_TIMEOUT - таймаут операций
-- MONGODB_SERVER_SELECTION_TIMEOUT - таймаут выбора сервера
+- MONGODB_CONNECT_TIMEOUT - таймаут подключения | def: 5000
+- MONGODB_SOCKET_TIMEOUT - таймаут операций | def: 30000
+- MONGODB_SERVER_SELECTION_TIMEOUT - таймаут выбора сервера | def: 20000
 
 ## Example
 **Build**
