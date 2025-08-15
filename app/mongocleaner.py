@@ -19,11 +19,11 @@ class IDBConnector(ABC):
     @abstractmethod
     def connect(self) -> bool:
         pass
-    
+
     @abstractmethod
     def disconnect(self) -> None:
         pass
-    
+
     @abstractmethod
     def get_collection(self):
         pass
@@ -68,16 +68,16 @@ class MongoDBConnector(IDBConnector):
                     serverSelectionTimeoutMS=self.config['server_selection_timeout'],
                     appname=self.config['appname']
                 )
-            
+
             self.db = self.client[self.config['db_name']]
             self.collection = self.db[self.config['collection_name']]
-            
+
             if not self._verify_connection():
                 raise ConnectionFailure("Connection verification failed")
-                
+
             self.logger.log("Connection established", "NETWORK")
             return True
-            
+
         except Exception as e:
             self.logger.log(f"Connection failed: {str(e)}", "NETWORK", True)
             return False
@@ -142,7 +142,7 @@ class MongoCleaner:
         try:
             self.logger.log("Starting collection compaction", "OPTIMIZE")
             collection = self.connector.get_collection()
-            
+
             # Check if sharded cluster
             if self.connector.client.admin.command('isMaster').get('msg') == 'isdbgrid':
                 raise RuntimeError("Cannot compact collection in a sharded cluster")
@@ -156,7 +156,7 @@ class MongoCleaner:
                 self.logger.log("Compaction completed successfully", "OPTIMIZE")
             else:
                 self.logger.log(f"Compaction completed with warnings: {result}", "OPTIMIZE")
-                
+
             return result
         except PyMongoError as e:
             self.logger.log(f"Compaction failed: {str(e)}", "OPTIMIZE", True)
@@ -172,12 +172,12 @@ class MongoCleaner:
         try:
             collection = self.connector.get_collection()
             stats = collection.database.command({"collStats": collection.name})
-            
+
             self.logger.log(f"Statistics of collection: \"{collection.name}\"", "STATS")
             self.logger.log(f"Documents: \t{stats['count']}", "STATS")
             self.logger.log(f"Storage size: \t{stats['storageSize'] / (1024*1024):.2f} MB", "STATS")
             self.logger.log(f"Index size: \t{stats['totalIndexSize'] / (1024*1024):.2f} MB", "STATS")
-            
+
             return stats
         except PyMongoError as e:
             self.logger.log(f"Failed to get statistics: {str(e)}", "STATS", True)
@@ -186,7 +186,7 @@ class MongoCleaner:
     def run(self) -> bool:
         if not self.connector.connect():
             return False
-            
+
         try:
             cutoff_date = self.calculate_cutoff_date()
             self.delete_old_documents(cutoff_date)
@@ -223,12 +223,12 @@ if __name__ == "__main__":
     logger = ConsoleLogger()
     connector = MongoDBConnector(config, logger)
     clean_strategy = CreatedAtCleanStrategy()
-    
+
     cleaner = MongoCleaner(
         connector=connector,
         logger=logger,
         clean_strategy=clean_strategy,
         retention_days=int(os.getenv('MONGODB_RETENTION_DAYS', '30'))
     )
-    
+
     cleaner.run()
