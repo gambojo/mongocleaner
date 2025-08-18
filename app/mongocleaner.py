@@ -174,9 +174,9 @@ class MongoCleaner:
             stats = collection.database.command({"collStats": collection.name})
 
             self.logger.log(f"Statistics of collection: \"{collection.name}\"", "STATS")
-            self.logger.log(f"Documents: \t{stats['count']}", "STATS")
-            self.logger.log(f"Storage size: \t{stats['storageSize'] / (1024*1024):.2f} MB", "STATS")
-            self.logger.log(f"Index size: \t{stats['totalIndexSize'] / (1024*1024):.2f} MB", "STATS")
+            self.logger.log(f"Documents:  {stats['count']}", "STATS")
+            self.logger.log(f"Storage size:  {stats['storageSize'] / (1024*1024):.2f} MB", "STATS")
+            self.logger.log(f"Index size:  {stats['totalIndexSize'] / (1024*1024):.2f} MB", "STATS")
 
             return stats
         except PyMongoError as e:
