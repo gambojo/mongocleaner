@@ -4,7 +4,7 @@
 | Name | Description | Default |
 |---|---|---|
 | MONGODB_DATABASE_ADMIN_USER | Пользователь базы данных | - |
-| MONGODB_USER_ADMIN_PASSWORD | Пароль пользователя | - |
+| MONGODB_DATABASE_ADMIN_PASSWORD | Пароль пользователя | - |
 | MONGODB_HOST | Имя или адрес сервера для подключения | localhost |
 | MONGODB_PORT | Порт на котором слушает БД | 27017 |
 | MONGODB_DB_NAME | Имя базы данных. | db |
@@ -27,7 +27,7 @@ docker build -t mongocleaner .
 ```bash
 docker run -it --rm \
     -e MONGODB_DATABASE_ADMIN_USER=username \
-    -e MONGODB_USER_ADMIN_PASSWORD=password \
+    -e MONGODB_DATABASE_ADMIN_PASSWORD=password \
     -e MONGODB_HOST=mongodb.example.com \
     -e MONGODB_PORT=27417 \
     -e MONGODB_DB_NAME=db-name \

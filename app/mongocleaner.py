@@ -106,7 +106,7 @@ def load_config() -> dict:
     """Загрузка конфигурации из переменных окружения"""
     return {
         'username': os.getenv('MONGODB_DATABASE_ADMIN_USER'),
-        'password': os.getenv('MONGODB_USER_ADMIN_PASSWORD'),
+        'password': os.getenv('MONGODB_DATABASE_ADMIN_PASSWORD'),
         'host': os.getenv('MONGODB_HOST', 'localhost'),
         'port': int(os.getenv('MONGODB_PORT', '27017')),
         'db_name': os.getenv('MONGODB_DB_NAME', 'db'),
