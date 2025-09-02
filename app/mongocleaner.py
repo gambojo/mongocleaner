@@ -150,6 +150,9 @@ if __name__ == "__main__":
     # Подключение к базе
     client, collection = create_mongo_connection(config)
 
+    if not client:
+        sys.exit(1)
+
     try:
         # Вычисление времени
         cutoff_date = datetime.now(timezone.utc) - timedelta(days=retention_days)
